@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TECHNEXA 2026 — Premier International Tech Symposium</title>
+  <meta name="description" content="TECHNEXA 2026 — Code, Compete, Connect. 2 days of GenAI workshop, Robo Race, 24H Hackathon, and Free Fire LAN Esports." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+</head>
+<body>
+
+  <!-- Techie Page Transition Loading Screen -->
+  <div id="loading-screen">
+    <div style="text-align:center;">
+      <img src="assets/techie.png" alt="Techie Mascot" style="width:110px;height:auto;filter:drop-shadow(0 10px 30px rgba(168,85,247,0.6));animation:techie-float 2s ease-in-out infinite alternate;" />
+      <div style="margin-top:1rem;"><img src="assets/logo.png" alt="TECHNEXA" style="max-height:45px;filter:drop-shadow(0 0 20px rgba(168,85,247,0.8));" /></div>
+    </div>
+    <div class="loading-bar-wrap" style="margin-top:1.5rem;"><div class="loading-bar"></div></div>
+    <div class="loading-text">Techie is loading TECHNEXA 2026...</div>
+  </div>
+
+  <!-- Snappy Custom Cursor -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- Background Particles -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Navbar Header (Sleek Full-Width Top Bar) -->
+  <div class="navbar-wrap">
+    <nav class="navbar">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.png" alt="TECHNEXA Logo" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="team.html">Organising Team</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="events.html" class="btn btn-primary btn-sm btn-ripple">Register Now</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="events.html">Events</a>
+    <a href="schedule.html">Schedule</a>
+    <a href="team.html">Organising Team</a>
+    <a href="sponsors.html">Sponsors</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="events.html" class="btn btn-primary mt-3">Register Now</a>
+  </div>
+
+  <div class="page-content">
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero" style="min-height:85vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:7.5rem;padding-bottom:4rem;">
+      <div class="grid-bg"></div>
+      <div class="glow-orb glow-orb-1 parallax-orb"></div>
+      <div class="glow-orb glow-orb-2 parallax-orb"></div>
+
+      <div class="container" style="max-width:920px;margin:0 auto;">
+        
+        <div class="badge-tag reveal" style="display:inline-flex;">
+          <span class="dot"></span> TECHNEXA 2026 &bull; September 11 &amp; 12, 2026
+        </div>
+
+        <!-- High Visibility Transparent Logo Image -->
+        <div class="reveal delay-1" style="margin:1.5rem 0 1rem;display:flex;justify-content:center;">
+          <img src="assets/logo.png" alt="TECHNEXA Logo" style="max-width:480px;width:92%;height:auto;filter:drop-shadow(0 10px 35px rgba(168,85,247,0.7));" />
+        </div>
+
+        <p class="tagline reveal delay-2" style="letter-spacing:0.25em;">CODE &bull; COMPETE &bull; CONNECT</p>
+
+        <!-- Redesigned Hero Title Typography -->
+        <h1 class="hero-title reveal delay-2" style="font-family:var(--font-head);font-size:clamp(2.4rem, 5.5vw, 4.2rem);font-weight:800;letter-spacing:-0.02em;line-height:1.15;margin:1rem 0;">
+          Where <span class="gradient-text">Innovation</span><br />
+          Meets <span style="background:linear-gradient(135deg, #00f5ff, #a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Ambition</span>
+        </h1>
+
+        <p class="hero-subtitle reveal delay-3" style="max-width:640px;margin:0 auto 1.5rem;">
+          2 Days of high-stakes technology, robotics racing, GenAI masterclass, 24H hackathon sprint, and Free Fire LAN esports.
+        </p>
+
+        <!-- Highlighted 3D Glowing Countdown Timer -->
+        <div style="margin:2.25rem 0;display:flex;justify-content:center;" class="reveal delay-4">
+          <div class="countdown-wrap" id="countdown">
+            <div class="countdown-unit">
+              <span class="countdown-number" id="cd-days">00</span>
+              <span class="countdown-label">Days</span>
+            </div>
+            <span class="countdown-colon">:</span>
+            <div class="countdown-unit">
+              <span class="countdown-number" id="cd-hours">00</span>
+              <span class="countdown-label">Hours</span>
+            </div>
+            <span class="countdown-colon">:</span>
+            <div class="countdown-unit">
+              <span class="countdown-number" id="cd-mins">00</span>
+              <span class="countdown-label">Mins</span>
+            </div>
+            <span class="countdown-colon">:</span>
+            <div class="countdown-unit">
+              <span class="countdown-number" id="cd-secs">00</span>
+              <span class="countdown-label">Secs</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="hero-actions reveal delay-5" style="justify-content:center;">
+          <a href="events.html" class="btn btn-primary btn-lg btn-ripple btn-3d">
+            <span>?? Explore Official Events</span>
+          </a>
+          <a href="team.html" class="btn btn-outline btn-lg btn-3d">
+            <span>Organising Team</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Live Highlights Ticker Bar -->
+    <div style="background:rgba(124,58,237,0.12);border-y:1px solid var(--glass-border);padding:0.875rem 0;overflow:hidden;white-space:nowrap;position:relative;">
+      <div style="display:inline-block;animation:ticker-slide 25s linear infinite;">
+        <span style="font-size:0.875rem;font-weight:700;color:var(--accent);margin-right:2.5rem;">?? Rs 1,50,000+ Total Prize Pool</span>
+        <span style="font-size:0.875rem;font-weight:700;color:var(--secondary);margin-right:2.5rem;">?? Hackathon — 24H Build Sprint</span>
+        <span style="font-size:0.875rem;font-weight:700;color:var(--green);margin-right:2.5rem;">??? Robo Race Championship</span>
+        <span style="font-size:0.875rem;font-weight:700;color:var(--pink);margin-right:2.5rem;">?? GenAI Workshop Masterclass</span>
+        <span style="font-size:0.875rem;font-weight:700;color:var(--accent);margin-right:2.5rem;">?? LAN Event of Free Fire Esports</span>
+      </div>
+    </div>
+
+    <style>
+      @keyframes ticker-slide {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+    </style>
+
+    <!-- Enhanced Prize Pool & Metrics Sci-Fi Card Section -->
+    <section class="section">
+      <div class="container">
+        <div style="background:linear-gradient(135deg, rgba(124,58,237,0.18), rgba(0,245,255,0.08));border:1.5px solid rgba(0,245,255,0.35);border-radius:28px;padding:3rem 2.5rem;backdrop-filter:blur(20px);box-shadow:0 25px 60px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.15);" class="reveal">
+          <div class="text-center mb-6">
+            <div class="section-label" style="display:inline-flex;"><span class="dot"></span> September 11 &amp; 12, 2026</div>
+            <h2 class="section-title" style="font-size:2.2rem;">Prize Pool &amp; <span class="gradient-text">Festival Metrics</span></h2>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card card-3d">
+              <div class="stat-icon">??</div>
+              <div class="stat-number" data-target="4">0</div>
+              <div class="stat-label">Major Competitions</div>
+            </div>
+            <div class="stat-card card-3d" style="background:linear-gradient(135deg,rgba(124,58,237,0.35),rgba(0,245,255,0.2));border-color:rgba(0,245,255,0.6);">
+              <div class="stat-icon">??</div>
+              <div class="stat-number" style="font-size:2.4rem;color:#ffffff;text-shadow:0 0 20px rgba(0,245,255,0.8);">Rs 1.5L+</div>
+              <div class="stat-label" style="color:#ffffff;font-weight:700;">Total Prize Pool</div>
+            </div>
+            <div class="stat-card card-3d">
+              <div class="stat-icon">??</div>
+              <div class="stat-number" data-target="1000" data-suffix="+">0</div>
+              <div class="stat-label">Participants</div>
+            </div>
+            <div class="stat-card card-3d">
+              <div class="stat-icon">??</div>
+              <div class="stat-number">2 Days</div>
+              <div class="stat-label">Sept 11 &amp; 12, 2026</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Organising Team Section Spotlight -->
+    <section class="section">
+      <div class="container">
+        <div class="glass-card card-3d reveal" style="padding:3.5rem 2.5rem;text-align:center;max-width:850px;margin:0 auto;border:1px solid rgba(168,85,247,0.4);">
+          <div class="section-label" style="display:inline-flex;margin-bottom:0.75rem;"><span class="dot"></span> Behind Technexa</div>
+          <h2 class="section-title" style="font-size:clamp(1.8rem, 4vw, 2.5rem);">Organising <span class="gradient-text">Team</span></h2>
+          <p style="color:var(--text-muted);margin:0 auto 1.75rem;max-width:600px;line-height:1.7;">
+            Meet the organisers and student leadership heads powering TECHNEXA 2026.
+          </p>
+          <a href="team.html" class="btn btn-primary btn-lg btn-ripple btn-3d">
+            Meet the Organising Team &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer (With Single Line Tagline and Clean Transparent Logo PNG) -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid" style="grid-template-columns: 2fr 1fr 1fr;">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="background:transparent;box-shadow:none;padding:0;">
+            <img src="assets/logo.png" alt="TECHNEXA" style="max-height:42px;filter:drop-shadow(0 0 15px rgba(168,85,247,0.8));" />
+          </a>
+          <p style="white-space:nowrap;font-size:0.95rem;color:var(--text-muted);margin-top:0.75rem;">TECHNEXA &mdash; Code &bull; Compete &bull; Connect.</p>
+          <div class="footer-social" style="margin-top:1.25rem;">
+            <a href="https://instagram.com" class="social-btn" aria-label="Instagram">??</a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">??</a>
+            <a href="https://discord.gg" class="social-btn" aria-label="Discord">??</a>
+            <a href="mailto:technexa@college.edu" class="social-btn" aria-label="Email">??</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="events.html">All Events</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="team.html">Organising Team</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Explore</h4>
+          <ul class="footer-links">
+            <li><a href="sponsors.html">Sponsors</a></li>
+            <li><a href="faq.html">FAQs</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 TECHNEXA. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" aria-label="Back to top">?</button>
+
+  <script src="js/particles.js"></script>
+  <script src="js/cms.js"></script><script src="js/main.js"></script>
+</body>
+</html>

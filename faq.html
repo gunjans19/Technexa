@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ | TECHNEXA 2026</title>
+  <meta name="description" content="Frequently asked questions about TECHNEXA 2026 — registration, events, eligibility, accommodation, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+</head>
+<body>
+<div id="loading-screen"><div class="loading-logo">TECHNEXA</div><div class="loading-bar-wrap"><div class="loading-bar"></div></div><div class="loading-text">Loading FAQs...</div></div>
+<div class="cursor-dot" id="cursor-dot"></div><div class="cursor-ring" id="cursor-ring"></div>
+<canvas id="particle-canvas"></canvas>
+<nav class="navbar"><a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="TECHNEXA Logo" /></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="events.html">Events</a></li><li><a href="schedule.html">Schedule</a></li><li><a href="team.html">Organising Team</a></li><li><a href="sponsors.html">Sponsors</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul>
+  <div class="nav-cta"><a href="events.html" class="btn btn-primary btn-sm btn-ripple">Register Now</a></div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Home</a><a href="events.html">Events</a><a href="contact.html">Contact</a>
+  <a href="events.html" class="btn btn-primary mt-3">Register Now</a>
+</div>
+<div class="page-content">
+
+  <section class="page-hero">
+    <div class="grid-bg"></div>
+    <div class="glow-orb glow-orb-1 parallax-orb"></div>
+    <div class="glow-orb glow-orb-2 parallax-orb"></div>
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>FAQ</span></div>
+      <div class="section-label" style="display:inline-flex;"><span class="dot"></span> Help Center</div>
+      <h1 class="page-hero-title">Frequently Asked <span class="gradient-text">Questions</span></h1>
+      <p class="page-hero-subtitle">Can't find what you're looking for? Reach out to us anytime.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 3fr;gap:4rem;align-items:start;">
+
+        <!-- Category Sidebar -->
+        <div class="reveal" style="position:sticky;top:90px;">
+          <div class="glass-card" style="padding:1.5rem;">
+            <div style="font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem;">Categories</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
+              <li><a href="#general" class="btn btn-ghost btn-sm" style="width:100%;justify-content:flex-start;text-align:left;">🏠 General</a></li>
+              <li><a href="#registration" class="btn btn-ghost btn-sm" style="width:100%;justify-content:flex-start;">📝 Registration</a></li>
+              <li><a href="#events" class="btn btn-ghost btn-sm" style="width:100%;justify-content:flex-start;">🏆 Events</a></li>
+              <li><a href="#workshops" class="btn btn-ghost btn-sm" style="width:100%;justify-content:flex-start;">🎓 Workshops</a></li>
+              <li><a href="#logistics" class="btn btn-ghost btn-sm" style="width:100%;justify-content:flex-start;">🗺️ Logistics</a></li>
+              <li><a href="#prizes" class="btn btn-ghost btn-sm" style="width:100%;justify-content:flex-start;">💰 Prizes</a></li>
+            </ul>
+          </div>
+          <div class="glass-card mt-3" style="padding:1.5rem;margin-top:1rem;">
+            <div style="font-size:0.875rem;color:var(--text-muted);margin-bottom:1rem;">Still have questions?</div>
+            <a href="contact.html" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;display:flex;">Contact Us →</a>
+          </div>
+        </div>
+
+        <!-- FAQ Accordions -->
+        <div>
+
+          <!-- General -->
+          <div id="general" class="mb-8 reveal">
+            <div class="section-label mb-4"><span class="dot"></span> General</div>
+            <div class="faq-list">
+              <div class="faq-item">
+                <button class="faq-question">What is TECHNEXA?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">TECHNEXA is the annual flagship technical festival of our college — a 3-day celebration of technology, innovation, and talent featuring 20+ events, workshops, competitions, and expert talks.</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">When and where is TECHNEXA 2026?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">TECHNEXA 2026 is scheduled for September 11–17, 2026, at our college campus. All major events will be held at various venues across the campus.</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">Is TECHNEXA only for CS/IT students?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Absolutely not! TECHNEXA welcomes students from all branches and disciplines. We have events for engineering, design, research, and even non-technical creative events. Everyone has a place at TECHNEXA.</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">Can students from other colleges participate?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes! TECHNEXA is open to students from all colleges and universities across the country. Outstation participants may register and attend all open events.</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Registration -->
+          <div id="registration" class="mb-8 reveal">
+            <div class="section-label mb-4"><span class="dot"></span> Registration</div>
+            <div class="faq-list">
+              <div class="faq-item">
+                <button class="faq-question">Is there a registration fee?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Registration for TECHNEXA events is completely free! Workshops are also free for all registered participants. There are no hidden charges.</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">How do I register?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Visit the Events page, choose your desired event, and click "Register Now." Fill in the form with your details and you'll receive a confirmation email. Simple as that!</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">Can I register for multiple events?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes, you can register for multiple events as long as the event timings don't conflict. Check the schedule page to plan your participation.</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">What is the registration deadline?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">The last date to register for most events is September 15, 2026. Paper Presentation abstract submission closes October 1, 2026. HackNova idea submission closes October 5, 2026.</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">Can I update or cancel my registration?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">You can update team member details until 1 week before the event. Cancellations can be made via email to technexa@college.edu. Spot registrations may be available for some events.</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Events -->
+          <div id="events" class="mb-8 reveal">
+            <div class="section-label mb-4"><span class="dot"></span> Events</div>
+            <div class="faq-list">
+              <div class="faq-item">
+                <button class="faq-question">How many events can I participate in?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">There is no limit on the number of events. However, practically, you'll be limited by time conflicts. We recommend planning your schedule carefully using the Schedule page.</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">Can I participate individually?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes! Many events like AlgoQuest � Speed Coding, Tech Trivia Blitz, Bug Hunt, and AI Art War allow individual participation. Check individual event pages for team size requirements.</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">What happens if I can't attend after registering?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Please inform the coordinators at least 24 hours in advance. This helps us manage seat allocation and shortlists for events with limited capacity.</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">Will there be online events?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">AlgoQuest � Speed Coding includes an online qualifier round. Some preliminary rounds may have online components. Main events are offline at the college campus.</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Workshops -->
+          <div id="workshops" class="mb-8 reveal">
+            <div class="section-label mb-4"><span class="dot"></span> Workshops</div>
+            <div class="faq-list">
+              <div class="faq-item">
+                <button class="faq-question">Do I need prior knowledge for workshops?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Most workshops are designed for beginners to intermediate levels. Basic programming knowledge is helpful for technical workshops. The UI/UX Figma workshop requires no coding skills.</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">Are certificates provided for workshops?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes! All participants who complete the workshop will receive a digital certificate of participation co-signed by TECHNEXA and the workshop speaker.</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">What should I bring to the workshops?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Bring your laptop with the recommended software pre-installed. Software requirements will be shared 1 week before the event via email. All materials will be provided digitally.</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Logistics -->
+          <div id="logistics" class="mb-8 reveal">
+            <div class="section-label mb-4"><span class="dot"></span> Logistics</div>
+            <div class="faq-list">
+              <div class="faq-item">
+                <button class="faq-question">Is accommodation available?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Limited accommodation is available on campus for outstation participants on a first-come-first-served basis. Please email technexa@college.edu to request accommodation when registering.</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">Will food be provided?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes! Food and beverages will be provided during HackNova (24 hours). Lunch will be available at subsidized rates for all participants. Midnight snacks during HackNova are free.</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">What do I need to carry for entry?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Carry your college ID card, registration confirmation email (print or digital), and laptop with charger. HackNova participants should also bring sleepwear/pillow as they may need to stay overnight.</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prizes -->
+          <div id="prizes" class="mb-4 reveal">
+            <div class="section-label mb-4"><span class="dot"></span> Prizes</div>
+            <div class="faq-list">
+              <div class="faq-item">
+                <button class="faq-question">What is the total prize pool?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">The total prize pool for TECHNEXA 2026 is ₹5 Lakhs+, distributed across 20+ events. The flagship HackNova event has the highest prize pool of ₹50,000.</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">How are prizes distributed?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Cash prizes are awarded during the Valedictory Ceremony on Day 3. Certificates are sent digitally within 7 days of the event. Equipment prizes are handed over at the ceremony.</div></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">Besides cash, are there other benefits?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Absolutely! Top performers get referrals to sponsor companies, goodies/swag kits, digital badges, featured on our website and social media, and opportunities for internship interviews with sponsor companies.</div></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Still have questions -->
+      <div class="glass-card reveal mt-6" style="padding:2.5rem;text-align:center;max-width:600px;margin:3rem auto 0;">
+        <div style="font-size:3rem;margin-bottom:1rem;">💬</div>
+        <h3 style="font-family:var(--font-head);font-size:1.25rem;font-weight:700;margin-bottom:0.75rem;">Didn't find your answer?</h3>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1.5rem;">Our team is happy to help! Reach out and we'll get back to you within 24 hours.</p>
+        <a href="contact.html" class="btn btn-primary btn-ripple">Contact Us →</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="assets/logo.png" alt="TECHNEXA" /><p>TECHNEXA — Code • Compete • Connect</p><div class="footer-social"><a href="#" class="social-btn">📸</a><a href="#" class="social-btn">💼</a><a href="#" class="social-btn">🎮</a><a href="#" class="social-btn">💻</a></div></div>
+      <div><h4 class="footer-heading">Quick Links</h4><ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="events.html">Events</a></li></ul></div>
+      <div><h4 class="footer-heading">Explore</h4><ul class="footer-links"><li><a href="sponsors.html">Sponsors</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      </div>
+    <div class="footer-bottom"><span>© 2026 TECHNEXA. All rights reserved.</span></div>
+  </div>
+</footer>
+<button id="back-to-top" aria-label="Back to top">↑</button>
+<script src="js/particles.js"></script><script src="js/cms.js"></script><script src="js/main.js"></script>
+</body>
+</html>

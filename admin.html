@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | TECHNEXA 2026 CMS</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* Admin Specific Styling */
+    body { background: #060817; }
+    .admin-layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+    .admin-sidebar {
+      background: rgba(12, 16, 43, 0.95);
+      border-right: 1px solid rgba(168, 85, 247, 0.3);
+      padding: 1.75rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+    }
+    .admin-nav { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 2rem; }
+    .admin-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 12px 18px;
+      border-radius: 12px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+    }
+    .admin-nav-btn:hover { background: rgba(255,255,255,0.06); color: white; }
+    .admin-nav-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+      border-color: rgba(255,255,255,0.2);
+    }
+    .admin-header {
+      height: 70px;
+      background: rgba(12, 16, 43, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(168, 85, 247, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .admin-content { padding: 2.5rem; max-width: 1400px; margin: 0 auto; width: 100%; }
+    .admin-tab { display: none; }
+    .admin-tab.active { display: block; animation: fadeIn 0.4s ease; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Custom Form Controls */
+    .form-group { margin-bottom: 1.5rem; }
+    .form-label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 12px;
+      color: white;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+    .form-control:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 15px rgba(0,245,255,0.3); }
+
+    /* Admin Cards & Tables */
+    .admin-card {
+      background: rgba(12, 16, 43, 0.85);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+    .admin-table { width: 100%; border-collapse: collapse; text-align: left; }
+    .admin-table th, .admin-table td { padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.9rem; }
+    .admin-table th { color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
+    .admin-table tr:hover td { background: rgba(255,255,255,0.04); }
+
+    /* Toast Notification */
+    #admin-toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, var(--green), #00f5ff);
+      color: #040612;
+      padding: 14px 24px;
+      border-radius: 30px;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0,255,157,0.4);
+      z-index: 99999;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+    #admin-toast.show { transform: translateY(0); opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div>
+        <div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0.5rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.1);">
+          <img src="assets/logo.png" alt="TECHNEXA" style="max-height:34px;" />
+          <span style="font-size:0.75rem;background:rgba(0,245,255,0.15);color:var(--accent);padding:3px 8px;border-radius:12px;font-weight:700;">CMS ADMIN</span>
+        </div>
+
+        <nav class="admin-nav">
+          <button class="admin-nav-btn active" onclick="switchAdminTab('overview', this)">📊 Overview</button>
+          <button class="admin-nav-btn" onclick="switchAdminTab('settings', this)">⚙️ General Settings</button>
+          <button class="admin-nav-btn" onclick="switchAdminTab('events', this)">🏆 Events Manager</button>
+          <button class="admin-nav-btn" onclick="switchAdminTab('schedule', this)">🗓️ Schedule Manager</button>
+          <button class="admin-nav-btn" onclick="switchAdminTab('team', this)">👥 Organising Team</button>
+          <button class="admin-nav-btn" onclick="switchAdminTab('sponsors', this)">🤝 Sponsors Manager</button>
+          <button class="admin-nav-btn" onclick="switchAdminTab('registrations', this)">📝 Registrations</button>
+          <button class="admin-nav-btn" onclick="switchAdminTab('faqs', this)">❓ FAQ Manager</button>
+        </nav>
+      </div>
+
+      <div>
+        <a href="index.html" class="btn btn-outline btn-sm w-full" style="width:100%;justify-content:center;margin-bottom:0.75rem;">🌐 View Live Site</a>
+        <button onclick="resetCMSData()" class="btn btn-secondary btn-sm w-full" style="width:100%;justify-content:center;background:rgba(255,77,141,0.2);color:var(--pink);border-color:rgba(255,77,141,0.4);">🔄 Reset Defaults</button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main>
+      <!-- Top Action Bar -->
+      <header class="admin-header">
+        <div>
+          <h2 style="font-size:1.25rem;font-weight:700;" id="current-tab-title">📊 Admin Overview</h2>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:center;">
+          <button onclick="exportCMSJSON()" class="btn btn-outline btn-sm">💾 Export Database JSON</button>
+          <button onclick="saveAllAdminChanges()" class="btn btn-primary btn-sm btn-ripple">✨ Save All Changes</button>
+        </div>
+      </header>
+
+      <div class="admin-content">
+
+        <!-- TAB 1: OVERVIEW -->
+        <div class="admin-tab active" id="tab-overview">
+          <div class="stats-grid mb-6">
+            <div class="stat-card">
+              <div class="stat-icon">🏆</div>
+              <div class="stat-number" id="dash-events-count">4</div>
+              <div class="stat-label">Active Events</div>
+            </div>
+            <div class="stat-card" style="background:linear-gradient(135deg,rgba(124,58,237,0.3),rgba(0,245,255,0.2));">
+              <div class="stat-icon">💰</div>
+              <div class="stat-number" id="dash-prize-pool">Rs 1.5L+</div>
+              <div class="stat-label">Total Prize Pool</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">📝</div>
+              <div class="stat-number" id="dash-regs-count">2</div>
+              <div class="stat-label">Registrations</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">📅</div>
+              <div class="stat-number" id="dash-dates">Sept 11 &amp; 12</div>
+              <div class="stat-label">Festival Dates</div>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <h3 style="font-family:var(--font-head);margin-bottom:1rem;color:var(--accent);">⚡ Quick Control Panel</h3>
+            <p style="color:var(--text-muted);margin-bottom:1.5rem;line-height:1.6;">Manage site-wide content dynamically. Any edits made here sync in real-time to your live festival website.</p>
+            <div class="flex gap-3 flex-wrap">
+              <button onclick="switchAdminTab('events', document.querySelectorAll('.admin-nav-btn')[2])" class="btn btn-primary btn-sm">+ Add New Event</button>
+              <button onclick="switchAdminTab('settings', document.querySelectorAll('.admin-nav-btn')[1])" class="btn btn-outline btn-sm">Edit Festival Info</button>
+              <button onclick="exportRegistrationsCSV()" class="btn btn-outline btn-sm">Download Registrations CSV</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: GENERAL SETTINGS -->
+        <div class="admin-tab" id="tab-settings">
+          <div class="admin-card">
+            <h3 style="font-family:var(--font-head);margin-bottom:1.5rem;" class="gradient-text">⚙️ Festival &amp; Site Settings</h3>
+            
+            <div class="grid-2 gap-4">
+              <div class="form-group">
+                <label class="form-label">Festival Name</label>
+                <input type="text" id="setting-name" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tagline</label>
+                <input type="text" id="setting-tagline" class="form-control" />
+              </div>
+            </div>
+
+            <div class="grid-2 gap-4">
+              <div class="form-group">
+                <label class="form-label">Festival Dates</label>
+                <input type="text" id="setting-dates" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Total Prize Pool Headline</label>
+                <input type="text" id="setting-prizepool" class="form-control" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Hero Main Headline</label>
+              <input type="text" id="setting-headline" class="form-control" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Hero Subtitle</label>
+              <textarea id="setting-subtitle" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Marquee Ticker Announcement Items (Comma Separated)</label>
+              <textarea id="setting-ticker" class="form-control" rows="3"></textarea>
+            </div>
+
+            <button onclick="saveGeneralSettings()" class="btn btn-primary btn-sm mt-3">Save Settings</button>
+          </div>
+        </div>
+
+        <!-- TAB 3: EVENTS MANAGER -->
+        <div class="admin-tab" id="tab-events">
+          <div class="admin-card" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+            <h3>🏆 Manage Official Events</h3>
+            <button onclick="openAddEventModal()" class="btn btn-primary btn-sm">+ Add New Event</button>
+          </div>
+          <div id="admin-events-list" class="grid-2 gap-4">
+            <!-- Dynamically Rendered Event Cards -->
+          </div>
+        </div>
+
+        <!-- TAB 4: SCHEDULE MANAGER -->
+        <div class="admin-tab" id="tab-schedule">
+          <div class="admin-card">
+            <h3 style="font-family:var(--font-head);margin-bottom:1.5rem;" class="gradient-text">🗓️ Timeline &amp; Schedule Mode</h3>
+            
+            <div class="form-group">
+              <label class="form-label">Schedule Display Mode</label>
+              <select id="schedule-tba-toggle" class="form-control">
+                <option value="true">"To Be Announced Soon" Mode</option>
+                <option value="false">Live Detailed Timeline Mode</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">TBA Announcement Teaser Message</label>
+              <textarea id="schedule-tba-msg" class="form-control" rows="2"></textarea>
+            </div>
+
+            <button onclick="saveScheduleSettings()" class="btn btn-primary btn-sm">Save Schedule Settings</button>
+          </div>
+        </div>
+
+        <!-- TAB 5: ORGANISING TEAM -->
+        <div class="admin-tab" id="tab-team">
+          <div class="admin-card" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+            <h3>👥 Organisers &amp; Domain Heads</h3>
+            <button onclick="openAddTeamModal()" class="btn btn-primary btn-sm">+ Add Member</button>
+          </div>
+          <div id="admin-team-list" class="grid-3 gap-4">
+            <!-- Dynamically Rendered Team Members -->
+          </div>
+        </div>
+
+        <!-- TAB 6: SPONSORS -->
+        <div class="admin-tab" id="tab-sponsors">
+          <div class="admin-card">
+            <h3>🤝 Sponsors &amp; Industry Partners</h3>
+            <div id="admin-sponsors-list" class="mt-4">
+              <!-- Dynamically Rendered Sponsors Table -->
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 7: REGISTRATIONS -->
+        <div class="admin-tab" id="tab-registrations">
+          <div class="admin-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+              <h3>📝 Registered Participants</h3>
+              <button onclick="exportRegistrationsCSV()" class="btn btn-outline btn-sm">📥 Export CSV</button>
+            </div>
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Event</th>
+                  <th>College</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="admin-registrations-tbody">
+                <!-- Dynamically Rendered Registrations -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 8: FAQS -->
+        <div class="admin-tab" id="tab-faqs">
+          <div class="admin-card">
+            <h3>❓ Manage Frequently Asked Questions</h3>
+            <div id="admin-faqs-list" class="mt-4">
+              <!-- Dynamically Rendered FAQs -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast Alert -->
+  <div id="admin-toast">✨ Changes saved successfully!</div>
+
+  <script src="js/cms.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

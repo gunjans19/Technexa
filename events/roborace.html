@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robo Race | TECHNEXA 2026</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+</head>
+<body>
+
+  <div id="loading-screen">
+    <div style="text-align:center;">
+      <img src="../assets/techie.png" alt="Techie" style="width:100px;height:auto;filter:drop-shadow(0 10px 25px rgba(168,85,247,0.5));" />
+      <div style="margin-top:1rem;"><img src="../assets/logo.png" alt="TECHNEXA" style="max-height:40px;" /></div>
+    </div>
+    <div class="loading-bar-wrap" style="margin-top:1.5rem;"><div class="loading-bar"></div></div>
+    <div class="loading-text">Loading Robo Race...</div>
+  </div>
+
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+  <canvas id="particle-canvas"></canvas>
+
+  <nav class="navbar">
+    <a href="../index.html" class="nav-logo"><img src="../assets/logo.png" alt="TECHNEXA" /></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../events.html">Events</a></li>
+      <li><a href="../speakers.html">Speakers</a></li>
+      <li><a href="../schedule.html">Schedule</a></li>
+      <li><a href="../team.html">Organising Team</a></li>
+      <li><a href="../sponsors.html">Sponsors</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta"><a href="../events.html" class="btn btn-primary btn-sm">All Events</a></div>
+  </nav>
+
+  <div class="page-content">
+    <section class="page-hero">
+      <div class="grid-bg"></div>
+      <div class="container">
+        <div class="breadcrumb justify-center"><a href="../index.html">Home</a><span>&rsaquo;</span><a href="../events.html">Events</a><span>&rsaquo;</span><span>Robo Race</span></div>
+        <div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#00ff9d,#00f5ff);display:flex;align-items:center;justify-content:center;font-size:3rem;margin:0 auto 1.5rem;box-shadow:0 0 40px rgba(0,255,157,0.5);">🏎️</div>
+        <span class="event-category-badge" style="display:inline-block;margin-bottom:1rem;">Robotics Track</span>
+        <h1 class="page-hero-title">Robo <span class="gradient-text">Race</span></h1>
+        <p class="page-hero-subtitle">High-speed wireless and autonomous robotics racing. Navigate complex obstacles, ramps, chicanes, and speed traps.</p>
+        <div class="flex gap-2 justify-center flex-wrap mt-4" style="gap:0.75rem;">
+          <span class="tag tag-blue">Prize Pool: Rs 30,000</span>
+          <span class="tag tag-cyan">Sept 12, 2026</span>
+          <span class="tag tag-purple">2–4 Members</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:1fr 300px;gap:3rem;">
+          <div>
+            <div class="mb-6 reveal">
+              <div class="section-label"><span class="dot"></span> Overview</div>
+              <h2 class="section-title" style="font-size:2rem;"><span class="gradient-text">About</span> Robo Race</h2>
+              <p style="color:var(--text-muted);line-height:1.8;">
+                Robo Race challenges engineering teams to design custom wired, wireless, or autonomous RC robots built to conquer an adrenaline-pumping obstacle track featuring gravel, bridges, hairpin turns, and speed stretches.
+              </p>
+            </div>
+            
+            <div class="glass-card card-3d mb-6 reveal" style="padding:2rem;">
+              <h3 style="font-family:var(--font-head);font-size:1.25rem;font-weight:700;margin-bottom:1.25rem;color:var(--accent);">Track &amp; Bot Specifications</h3>
+              <ul class="highlight-list">
+                <li>Bot Dimensions: Max 30cm x 30cm x 30cm.</li>
+                <li>Weight Limit: Max 5kg.</li>
+                <li>Control: Wired/Wireless (RF, Bluetooth, Wi-Fi).</li>
+                <li>Time trial laps with penalties for track boundaries.</li>
+              </ul>
+            </div>
+          </div>
+
+          <aside>
+            <div class="glass-card card-3d reveal" style="padding:1.75rem;position:sticky;top:100px;">
+              <h3 style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--glass-border);">Race Details</h3>
+              <div style="display:flex;flex-direction:column;gap:1rem;">
+                <div class="contact-info-item" style="padding:1rem;"><div class="contact-icon" style="width:36px;height:36px;font-size:1rem;">📅</div><div><div class="contact-label">Date</div><div class="contact-value">Sept 12, 2026</div></div></div>
+                <div class="contact-info-item" style="padding:1rem;"><div class="contact-icon" style="width:36px;height:36px;font-size:1rem;">📍</div><div><div class="contact-label">Venue</div><div class="contact-value">Outdoor Robotics Arena</div></div></div>
+                <div class="contact-info-item" style="padding:1rem;"><div class="contact-icon" style="width:36px;height:36px;font-size:1rem;">🏆</div><div><div class="contact-label">Prize Pool</div><div class="contact-value" style="color:var(--accent);">Rs 30,000</div></div></div>
+              </div>
+              <a href="../events.html" class="btn btn-primary btn-ripple" style="width:100%;justify-content:center;margin-top:1.5rem;display:flex;">Register Now &rarr;</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid" style="grid-template-columns: 2fr 1fr 1fr;">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo"><img src="../assets/logo.png" alt="TECHNEXA" /></a>
+          <p>TECHNEXA — Code &bull; Compete &bull; Connect.</p>
+        </div>
+        <div><h4 class="footer-heading">Quick Links</h4><ul class="footer-links"><li><a href="../about.html">About</a></li><li><a href="../events.html">Events</a></li></ul></div>
+        <div><h4 class="footer-heading">Explore</h4><ul class="footer-links"><li><a href="../schedule.html">Schedule</a></li><li><a href="../contact.html">Contact</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 TECHNEXA. All rights reserved.</span></div>
+    </div>
+  </footer>
+  <script src="../js/particles.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

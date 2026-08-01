@@ -1,0 +1,203 @@
+import os
+
+team_content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Organising Team | TECHNEXA 2026</title>
+  <meta name="description" content="Meet the Organisers and Student Leadership powering TECHNEXA 2026." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+</head>
+<body>
+
+  <div id="loading-screen">
+    <div style="text-align:center;">
+      <img src="assets/techie.png" alt="Techie Mascot" style="width:100px;height:auto;filter:drop-shadow(0 10px 25px rgba(168,85,247,0.5));" />
+      <div style="margin-top:1rem;"><img src="assets/logo.png" alt="TECHNEXA" style="max-height:40px;" /></div>
+    </div>
+    <div class="loading-bar-wrap" style="margin-top:1.5rem;"><div class="loading-bar"></div></div>
+    <div class="loading-text">Loading Organising Team...</div>
+  </div>
+
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="navbar-wrap">
+    <nav class="navbar">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.png" alt="TECHNEXA Logo" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="team.html" class="active">Organising Team</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta"><a href="events.html" class="btn btn-primary btn-sm btn-ripple">Register Now</a></div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="events.html">Events</a>
+    <a href="schedule.html">Schedule</a>
+    <a href="team.html">Organising Team</a>
+    <a href="sponsors.html">Sponsors</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <div class="page-content">
+
+    <section class="page-hero">
+      <div class="grid-bg"></div>
+      <div class="glow-orb glow-orb-1"></div>
+      <div class="container text-center">
+        <div class="breadcrumb justify-center"><a href="index.html">Home</a><span>&rsaquo;</span><span>Organising Team</span></div>
+        <div class="section-label" style="display:inline-flex;"><span class="dot"></span> Student Leadership &amp; Organisers</div>
+        <h1 class="page-hero-title">Organising <span class="gradient-text">Team</span></h1>
+        <p class="page-hero-subtitle">The passionate organisers and student leads behind TECHNEXA 2026.</p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header text-center reveal">
+          <div class="section-label" style="display:inline-flex;"><span class="dot"></span> Leadership</div>
+          <h2 class="section-title"><span class="gradient-text">Organisers</span></h2>
+          <p class="section-subtitle">Student convenors spearheading event operations, logistics, and planning.</p>
+        </div>
+
+        <div class="grid-3 mt-8" style="gap:2rem;">
+          <div class="speaker-card card-3d reveal delay-1">
+            <div class="speaker-img-wrap">
+              <div style="width:100%;height:220px;background:linear-gradient(135deg,rgba(124,58,237,0.3),rgba(0,245,255,0.2));display:flex;align-items:center;justify-content:center;font-size:4rem;">⚡</div>
+            </div>
+            <div class="speaker-info">
+              <h3 class="speaker-name">Arnav Sharma</h3>
+              <p class="speaker-title" style="color:var(--accent);">Lead Organiser</p>
+              <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.5rem;">Overall Tech Fest Convenor &amp; Platform Architecture.</p>
+            </div>
+          </div>
+
+          <div class="speaker-card card-3d reveal delay-2">
+            <div class="speaker-img-wrap">
+              <div style="width:100%;height:220px;background:linear-gradient(135deg,rgba(0,245,255,0.2),rgba(168,85,247,0.3));display:flex;align-items:center;justify-content:center;font-size:4rem;">🚀</div>
+            </div>
+            <div class="speaker-info">
+              <h3 class="speaker-name">Riya Verma</h3>
+              <p class="speaker-title" style="color:var(--secondary);">Co-Organiser</p>
+              <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.5rem;">Operations, Sponsorship &amp; Public Relations.</p>
+            </div>
+          </div>
+
+          <div class="speaker-card card-3d reveal delay-3">
+            <div class="speaker-img-wrap">
+              <div style="width:100%;height:220px;background:linear-gradient(135deg,rgba(255,77,141,0.25),rgba(124,58,237,0.3));display:flex;align-items:center;justify-content:center;font-size:4rem;">🎯</div>
+            </div>
+            <div class="speaker-info">
+              <h3 class="speaker-name">Karan Patel</h3>
+              <p class="speaker-title" style="color:var(--pink);">Technical Lead</p>
+              <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.5rem;">Hackathon &amp; Speed Coding Platform Management.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header text-center reveal">
+          <div class="section-label" style="display:inline-flex;"><span class="dot"></span> Domain Heads</div>
+          <h2 class="section-title">Student <span class="gradient-text">Leadership</span></h2>
+          <p class="section-subtitle">Domain heads managing specialized tracks, robotics, esports, and creative design.</p>
+        </div>
+
+        <div class="grid-4 mt-8" style="gap:1.5rem;">
+          <div class="glass-card card-3d reveal delay-1" style="padding:1.5rem;text-align:center;">
+            <div style="font-size:2.5rem;margin-bottom:0.5rem;">🤖</div>
+            <h4 style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;">Rohan Mehta</h4>
+            <p style="font-size:0.8rem;color:var(--accent);font-weight:600;">Robotics Domain Head</p>
+          </div>
+
+          <div class="glass-card card-3d reveal delay-2" style="padding:1.5rem;text-align:center;">
+            <div style="font-size:2.5rem;margin-bottom:0.5rem;">🧠</div>
+            <h4 style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;">Ananya Roy</h4>
+            <p style="font-size:0.8rem;color:var(--secondary);font-weight:600;">GenAI Masterclass Head</p>
+          </div>
+
+          <div class="glass-card card-3d reveal delay-3" style="padding:1.5rem;text-align:center;">
+            <div style="font-size:2.5rem;margin-bottom:0.5rem;">🎮</div>
+            <h4 style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;">Vikram Singh</h4>
+            <p style="font-size:0.8rem;color:var(--pink);font-weight:600;">Esports Domain Head</p>
+          </div>
+
+          <div class="glass-card card-3d reveal delay-4" style="padding:1.5rem;text-align:center;">
+            <div style="font-size:2.5rem;margin-bottom:0.5rem;">🎨</div>
+            <h4 style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;">Sneha Gupta</h4>
+            <p style="font-size:0.8rem;color:var(--green);font-weight:600;">Design &amp; Media Head</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid" style="grid-template-columns: 2fr 1fr 1fr;">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="background:transparent;box-shadow:none;padding:0;">
+            <img src="assets/logo.png" alt="TECHNEXA" style="max-height:42px;filter:drop-shadow(0 0 15px rgba(168,85,247,0.8));" />
+          </a>
+          <p style="white-space:nowrap;font-size:0.95rem;color:var(--text-muted);margin-top:0.75rem;">TECHNEXA &mdash; Code &bull; Compete &bull; Connect.</p>
+          <div class="footer-social" style="margin-top:1.25rem;">
+            <a href="https://instagram.com" class="social-btn">📸</a>
+            <a href="#" class="social-btn">💼</a>
+            <a href="https://discord.gg" class="social-btn">🎮</a>
+            <a href="mailto:technexa@college.edu" class="social-btn">📧</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="events.html">All Events</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="team.html">Organising Team</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Explore</h4>
+          <ul class="footer-links">
+            <li><a href="sponsors.html">Sponsors</a></li>
+            <li><a href="faq.html">FAQs</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 TECHNEXA. All rights reserved.</span></div>
+    </div>
+  </footer>
+
+  <script src="js/particles.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>"""
+
+with open('team.html', 'w', encoding='utf-8') as f:
+    f.write(team_content)
+print("team.html successfully saved!")

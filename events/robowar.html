@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>RoboWar | TECHNEXA 2026</title><link rel="stylesheet" href="../css/styles.css"/><script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script></head>
+<body>
+<div id="loading-screen"><div class="loading-logo">TECHNEXA</div><div class="loading-bar-wrap"><div class="loading-bar"></div></div><div class="loading-text">Loading RoboWar...</div></div>
+<div class="cursor-dot" id="cursor-dot"></div><div class="cursor-ring" id="cursor-ring"></div>
+<canvas id="particle-canvas"></canvas>
+<nav class="navbar"><a href="../index.html" class="nav-logo"><img src="../assets/logo.png" alt="TECHNEXA"/></a><ul class="nav-links"><li><a href="../index.html">Home</a></li><li><a href="../events.html">Events</a></li><li><a href="../contact.html">Contact</a></li></ul><div class="nav-cta"><a href="../events.html" class="btn btn-primary btn-sm">All Events</a></div><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button></nav>
+<div class="mobile-nav" id="mobile-nav"><a href="../index.html">Home</a><a href="../events.html">Events</a><a href="../events.html" class="btn btn-primary mt-3">All Events</a></div>
+<div class="page-content">
+  <section style="min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 4rem;position:relative;overflow:hidden;">
+    <div class="grid-bg"></div>
+    <div class="glow-orb" style="width:400px;height:400px;background:rgba(0,255,136,0.1);top:-100px;right:0;filter:blur(80px);"></div>
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="breadcrumb justify-center"><a href="../index.html">Home</a><span>›</span><a href="../events.html">Events</a><span>›</span><span>RoboWar</span></div>
+      <div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#00FF88,#00F5FF);display:flex;align-items:center;justify-content:center;font-size:3rem;margin:0 auto 2rem;box-shadow:0 0 40px rgba(0,255,136,0.5);">🤖</div>
+      <span class="event-category-badge" style="display:inline-block;margin-bottom:1rem;color:var(--green);background:rgba(0,255,136,0.1);border-color:rgba(0,255,136,0.3)">Robotics Combat</span>
+      <h1 class="page-hero-title">RoboWar</h1>
+      <p style="font-family:var(--font-display);font-size:1.5rem;color:var(--green);margin-bottom:1rem;font-weight:600;">Robot Combat Championship</p>
+      <p class="page-hero-subtitle">Engineer the ultimate battle bot. Enter the arena and fight for supremacy in the most electrifying event of TECHNEXA.</p>
+      <div class="flex gap-2 justify-center flex-wrap mt-4" style="gap:0.75rem;margin-top:1.5rem;">
+        <span class="tag tag-green">₹30,000 Prize Pool</span><span class="tag tag-cyan">Sept 11, 2026</span><span class="tag tag-blue">2–4 Members</span><span class="tag tag-purple">Pre-built Robot</span>
+      </div>
+      <div class="flex gap-2 justify-center mt-4" style="gap:1rem;margin-top:2rem;">
+        <a href="#" class="btn btn-primary btn-lg btn-ripple">Register Now</a>
+        <a href="#details" class="btn btn-outline btn-lg">Specifications</a>
+      </div>
+    </div>
+  </section>
+  <div class="divider"></div>
+  <section class="section" id="details">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 300px;gap:3rem;">
+        <div>
+          <div class="mb-6 reveal"><div class="section-label"><span class="dot"></span> Overview</div><h2 class="section-title" style="font-size:2rem;">About <span class="gradient-text">RoboWar</span></h2><p style="color:var(--text-muted);line-height:1.8;">RoboWar is a bot combat championship where teams design and build radio-controlled battle robots to fight in a controlled arena. The last bot standing wins! Robots will fight in head-to-head elimination matches judged on aggression, control, and damage.</p></div>
+          <div class="glass-card mb-6 reveal" style="padding:2rem;">
+            <h3 style="font-family:var(--font-head);font-size:1.25rem;font-weight:700;margin-bottom:1.25rem;color:var(--green);">🔧 Robot Specifications</h3>
+            <ul class="highlight-list">
+              <li>Maximum bot weight: 15 kg</li>
+              <li>Maximum dimensions: 60cm × 60cm × 30cm</li>
+              <li>Power supply: 12V DC maximum (battery operated)</li>
+              <li>Autonomous operation: NOT allowed — must be RC controlled</li>
+              <li>Weapon systems: pushers, flippers, spinners allowed. No projectiles.</li>
+              <li>Flame-based weapons: NOT allowed</li>
+              <li>All sharp edges must be covered during inspection</li>
+            </ul>
+          </div>
+          <div class="glass-card mb-6 reveal" style="padding:2rem;">
+            <h3 style="font-family:var(--font-head);font-size:1.25rem;font-weight:700;margin-bottom:1rem;color:var(--accent);">📋 Combat Rules</h3>
+            <ul class="highlight-list">
+              <li>Matches are 3 minutes long. KO wins immediately.</li>
+              <li>If no KO, judges decide winner based on aggression, damage, control.</li>
+              <li>Robot must pass safety inspection before competing.</li>
+              <li>No modifications to the robot after matches begin.</li>
+              <li>Teams get 15 minutes between matches for repairs.</li>
+              <li>Double-elimination bracket format.</li>
+            </ul>
+          </div>
+          <div class="faq-list">
+            <div class="faq-item"><button class="faq-question">Can we use a pre-built robot?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Yes, commercial chassis are allowed but all modifications and weapons must be built by the team. Fully off-the-shelf combat robots are not permitted.</div></div></div>
+            <div class="faq-item"><button class="faq-question">Is the arena provided?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Yes, a 3m × 3m polycarbonate arena will be provided by the organizers. Teams only need to bring their robots and controllers.</div></div></div>
+          </div>
+        </div>
+        <aside>
+          <div class="glass-card reveal" style="padding:1.75rem;position:sticky;top:90px;">
+            <h3 style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--glass-border);">Event Info</h3>
+            <div style="display:flex;flex-direction:column;gap:1rem;">
+              <div class="contact-info-item" style="padding:1rem;"><div class="contact-icon" style="width:36px;height:36px;font-size:1rem;">📅</div><div><div class="contact-label">Date</div><div class="contact-value">Sept 11, 2026</div></div></div>
+              <div class="contact-info-item" style="padding:1rem;"><div class="contact-icon" style="width:36px;height:36px;font-size:1rem;">⏱</div><div><div class="contact-label">Duration</div><div class="contact-value">Full Day</div></div></div>
+              <div class="contact-info-item" style="padding:1rem;"><div class="contact-icon" style="width:36px;height:36px;font-size:1rem;">📍</div><div><div class="contact-label">Venue</div><div class="contact-value">Open Ground, Block C</div></div></div>
+              <div class="contact-info-item" style="padding:1rem;"><div class="contact-icon" style="width:36px;height:36px;font-size:1rem;">🏆</div><div><div class="contact-label">Prize Pool</div><div class="contact-value" style="color:var(--green);">₹30,000</div></div></div>
+            </div>
+            <a href="#" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:1.5rem;display:flex;">Register Now →</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</div>
+<footer><div class="container"><div class="footer-bottom" style="padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.06);"><span>© 2026 TECHNEXA.</span><a href="../events.html">← Back to Events</a></div></div></footer>
+<button id="back-to-top" aria-label="Back to top">↑</button>
+<script src="../js/particles.js"></script><script src="../js/main.js"></script>
+</body>
+</html>

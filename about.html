@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | TECHNEXA 2026</title>
+  <meta name="description" content="Learn about TECHNEXA 2026 — Premier International Tech Symposium." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+</head>
+<body>
+
+  <!-- Techie Loading Screen -->
+  <div id="loading-screen">
+    <div style="text-align:center;">
+      <img src="assets/techie.png" alt="Techie Mascot" style="width:100px;height:auto;filter:drop-shadow(0 10px 25px rgba(168,85,247,0.5));" />
+      <div style="margin-top:1rem;"><img src="assets/logo.png" alt="TECHNEXA" style="max-height:40px;" /></div>
+    </div>
+    <div class="loading-bar-wrap" style="margin-top:1.5rem;"><div class="loading-bar"></div></div>
+    <div class="loading-text">Loading About Us...</div>
+  </div>
+
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Navbar Header -->
+  <div class="navbar-wrap">
+    <nav class="navbar">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.png" alt="TECHNEXA Logo" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="team.html">Organising Team</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta"><a href="events.html" class="btn btn-primary btn-sm btn-ripple">Register Now</a></div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="events.html">Events</a>
+    <a href="schedule.html">Schedule</a>
+    <a href="team.html">Organising Team</a>
+    <a href="sponsors.html">Sponsors</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <div class="page-content">
+
+    <section class="page-hero">
+      <div class="grid-bg"></div>
+      <div class="glow-orb glow-orb-1"></div>
+      <div class="container text-center">
+        <div class="breadcrumb justify-center"><a href="index.html">Home</a><span>&rsaquo;</span><span>About Us</span></div>
+        <div class="section-label" style="display:inline-flex;"><span class="dot"></span> September 11 &amp; 12, 2026</div>
+        <h1 class="page-hero-title">About <span class="gradient-text">TECHNEXA 2026</span></h1>
+        <p class="page-hero-subtitle">The annual technical festival empowering coders, roboticists, AI developers, and esports competitors.</p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid-2 gap-8 align-center">
+          <div class="reveal">
+            <div class="section-label" style="display:inline-flex;"><span class="dot"></span> Our Vision</div>
+            <h2 class="section-title">Where Innovation Meets <span class="gradient-text">Real-World Impact</span></h2>
+            <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">
+              TECHNEXA 2026 brings together over 1,000+ passionate engineers, developers, and creators across 50+ institutions for a 2-day immersive experience on September 11 &amp; 12, 2026.
+            </p>
+            <div class="glass-card card-3d" style="padding:1.5rem;border-left:4px solid var(--accent);">
+              <h4 style="font-family:var(--font-head);color:var(--accent);font-weight:700;margin-bottom:0.5rem;">?? Code &bull; Compete &bull; Connect</h4>
+              <p style="font-size:0.9rem;color:var(--text-dim);margin:0;">From hands-on GenAI agent bootcamps to adrenaline-filled Robo Racing and LAN Esports, TECHNEXA is the ultimate technical proving ground.</p>
+            </div>
+          </div>
+
+          <div class="glass-card card-3d reveal delay-2" style="padding:2.5rem;text-align:center;">
+            <div style="font-size:3.5rem;margin-bottom:1rem;">??</div>
+            <h3 style="font-family:var(--font-head);font-size:1.8rem;font-weight:800;margin-bottom:1rem;" class="gradient-text">Rs 1.5L+ Prize Pool</h3>
+            <p style="color:var(--text-muted);line-height:1.7;">Cash rewards, merit certificates, and direct industry networking opportunities for all track winners.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid" style="grid-template-columns: 2fr 1fr 1fr;">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="background:transparent;box-shadow:none;padding:0;">
+            <img src="assets/logo.png" alt="TECHNEXA" style="max-height:42px;filter:drop-shadow(0 0 15px rgba(168,85,247,0.8));" />
+          </a>
+          <p style="white-space:nowrap;font-size:0.95rem;color:var(--text-muted);margin-top:0.75rem;">TECHNEXA &mdash; Code &bull; Compete &bull; Connect.</p>
+          <div class="footer-social" style="margin-top:1.25rem;">
+            <a href="https://instagram.com" class="social-btn">??</a>
+            <a href="#" class="social-btn">??</a>
+            <a href="https://discord.gg" class="social-btn">??</a>
+            <a href="mailto:technexa@college.edu" class="social-btn">??</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="events.html">All Events</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="team.html">Organising Team</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Explore</h4>
+          <ul class="footer-links">
+            <li><a href="sponsors.html">Sponsors</a></li>
+            <li><a href="faq.html">FAQs</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 TECHNEXA. All rights reserved.</span></div>
+    </div>
+  </footer>
+
+  <script src="js/particles.js"></script>
+  <script src="js/cms.js"></script><script src="js/main.js"></script>
+</body>
+</html>
