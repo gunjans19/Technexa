@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    TECHNEXA — Main JavaScript
    Core interactions, animations, cursor, navbar, counters
    ============================================================ */
@@ -376,6 +376,26 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     `;
     document.head.appendChild(style);
+
+  /* ── Production Security & Source View Protection ──────────────── */
+  document.addEventListener('contextmenu', (e) => {
+    if (!window.location.pathname.includes('admin.html')) {
+      e.preventDefault();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (window.location.pathname.includes('admin.html')) return;
+    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+Shift+C
+    if (
+      e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) ||
+      (e.ctrlKey && (e.key === 'U' || e.key === 'u'))
+    ) {
+      e.preventDefault();
+    }
+  });
+
   }
 
 });
