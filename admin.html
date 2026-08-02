@@ -6,10 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard | TECHNEXA 2026 CMS</title>
   <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
   <style>
     /* Admin Specific Styling */
-    body { background: #060817; }
+    body { background: #060817; color: #ffffff; }
     .admin-layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+    
+    @media (max-width: 900px) {
+      .admin-layout { grid-template-columns: 1fr; }
+      .admin-sidebar { position: relative !important; height: auto !important; }
+    }
+
     .admin-sidebar {
       background: rgba(12, 16, 43, 0.95);
       border-right: 1px solid rgba(168, 85, 247, 0.3);
@@ -21,8 +28,9 @@
       top: 0;
       height: 100vh;
       box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+      z-index: 100;
     }
-    .admin-nav { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 2rem; }
+    .admin-nav { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.5rem; }
     .admin-nav-btn {
       display: flex;
       align-items: center;
@@ -46,36 +54,38 @@
       border-color: rgba(255,255,255,0.2);
     }
     .admin-header {
-      height: 70px;
+      min-height: 70px;
       background: rgba(12, 16, 43, 0.85);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(168, 85, 247, 0.3);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 2rem;
+      padding: 1rem 2rem;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 90;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
-    .admin-content { padding: 2.5rem; max-width: 1400px; margin: 0 auto; width: 100%; }
+    .admin-content { padding: 2.25rem 2rem; max-width: 1400px; margin: 0 auto; width: 100%; }
     .admin-tab { display: none; }
     .admin-tab.active { display: block; animation: fadeIn 0.4s ease; }
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
     /* Custom Form Controls */
-    .form-group { margin-bottom: 1.5rem; }
-    .form-label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-label { display: block; font-size: 0.825rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.05em; }
     .form-control {
       width: 100%;
-      padding: 12px 16px;
+      padding: 11px 15px;
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid rgba(168, 85, 247, 0.3);
       border-radius: 12px;
       color: white;
       font-family: inherit;
-      font-size: 0.95rem;
+      font-size: 0.925rem;
       transition: all 0.3s ease;
     }
     .form-control:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 15px rgba(0,245,255,0.3); }
@@ -85,15 +95,39 @@
       background: rgba(12, 16, 43, 0.85);
       border: 1px solid rgba(168, 85, 247, 0.3);
       border-radius: 20px;
-      padding: 2rem;
-      margin-bottom: 2rem;
+      padding: 1.75rem;
+      margin-bottom: 1.75rem;
       backdrop-filter: blur(16px);
       box-shadow: 0 10px 40px rgba(0,0,0,0.5);
     }
+    .table-container { overflow-x: auto; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); }
     .admin-table { width: 100%; border-collapse: collapse; text-align: left; }
-    .admin-table th, .admin-table td { padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.9rem; }
-    .admin-table th { color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
+    .admin-table th, .admin-table td { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.875rem; }
+    .admin-table th { background: rgba(15, 23, 42, 0.9); color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.775rem; letter-spacing: 0.05em; }
     .admin-table tr:hover td { background: rgba(255,255,255,0.04); }
+
+    /* Modal Overlay */
+    .admin-modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(4, 6, 18, 0.85);
+      backdrop-filter: blur(16px);
+      z-index: 99999;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+      opacity: 0; pointer-events: none; transition: all 0.3s ease;
+    }
+    .admin-modal-overlay.open { opacity: 1; pointer-events: auto; }
+    .admin-modal {
+      background: rgba(12, 16, 43, 0.95);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      border-radius: 24px;
+      padding: 2.25rem;
+      width: 100%; max-width: 580px;
+      max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+      transform: translateY(20px); transition: transform 0.3s ease;
+    }
+    .admin-modal-overlay.open .admin-modal { transform: translateY(0); }
 
     /* Toast Notification */
     #admin-toast {
@@ -106,7 +140,7 @@
       border-radius: 30px;
       font-weight: 700;
       box-shadow: 0 10px 30px rgba(0,255,157,0.4);
-      z-index: 99999;
+      z-index: 999999;
       transform: translateY(100px);
       opacity: 0;
       transition: all 0.4s ease;
@@ -116,14 +150,42 @@
 </head>
 <body>
 
+  <!-- AUTH LOCK OVERLAY -->
+  <div id="admin-login-overlay" style="position:fixed;inset:0;background:rgba(4,6,18,0.96);backdrop-filter:blur(24px);z-index:999999;display:flex;align-items:center;justify-content:center;padding:1.5rem;">
+    <div style="background:rgba(12,16,43,0.95);border:1px solid rgba(168,85,247,0.4);border-radius:24px;padding:2.5rem;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,0.8);text-align:center;">
+      <div style="display:flex;justify-content:center;margin-bottom:1rem;">
+        <img src="assets/tn-logo.png" alt="TN Logo" style="height:50px;width:auto;border-radius:10px;background:rgba(255,255,255,0.9);padding:4px 8px;" />
+      </div>
+      <h2 style="font-family:var(--font-head);font-size:1.5rem;font-weight:800;color:white;margin-bottom:0.25rem;">ADMIN PORTAL</h2>
+      <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:1.5rem;">TECHNEXA 2026 CMS Authentication</p>
+      
+      <form id="admin-login-form" onsubmit="handleAdminLogin(event)">
+        <div class="form-group" style="text-align:left;">
+          <label class="form-label">Admin ID</label>
+          <input type="text" id="login-admin-id" class="form-control" placeholder="Admin ID (default: admin)" required />
+        </div>
+        <div class="form-group" style="text-align:left;">
+          <label class="form-label">Passcode</label>
+          <input type="password" id="login-admin-pass" class="form-control" placeholder="Passcode (default: 2026)" required />
+        </div>
+        <div id="login-error-msg" style="color:var(--pink);font-size:0.825rem;margin-bottom:1rem;display:none;font-weight:600;">❌ Invalid Admin ID or Passcode!</div>
+        <button type="submit" class="btn btn-primary w-full" style="width:100%;justify-content:center;padding:12px;font-size:0.95rem;">🔓 Access Dashboard</button>
+      </form>
+      <div style="margin-top:1.25rem;font-size:0.75rem;color:var(--text-dim);">
+        Credentials — ID: <code style="color:var(--accent);">admin</code> | Pass: <code style="color:var(--accent);">2026</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN MAIN LAYOUT -->
   <div class="admin-layout">
     
     <!-- Sidebar Navigation -->
     <aside class="admin-sidebar">
       <div>
         <div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0.5rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.1);">
-          <img src="assets/logo.png" alt="TECHNEXA" style="max-height:34px;" />
-          <span style="font-size:0.75rem;background:rgba(0,245,255,0.15);color:var(--accent);padding:3px 8px;border-radius:12px;font-weight:700;">CMS ADMIN</span>
+          <img src="assets/logo.png" alt="TECHNEXA" style="max-height:32px;" />
+          <span id="role-badge" style="font-size:0.7rem;background:rgba(0,245,255,0.15);color:var(--accent);padding:3px 8px;border-radius:12px;font-weight:700;">ADMIN</span>
         </div>
 
         <nav class="admin-nav">
@@ -138,9 +200,9 @@
         </nav>
       </div>
 
-      <div>
-        <a href="index.html" class="btn btn-outline btn-sm w-full" style="width:100%;justify-content:center;margin-bottom:0.75rem;">🌐 View Live Site</a>
-        <button onclick="resetCMSData()" class="btn btn-secondary btn-sm w-full" style="width:100%;justify-content:center;background:rgba(255,77,141,0.2);color:var(--pink);border-color:rgba(255,77,141,0.4);">🔄 Reset Defaults</button>
+      <div style="margin-top:2rem;">
+        <a href="index.html" class="btn btn-outline btn-sm w-full" style="width:100%;justify-content:center;margin-bottom:0.6rem;">🌐 View Live Site</a>
+        <button onclick="handleAdminLogout()" class="btn btn-secondary btn-sm w-full" style="width:100%;justify-content:center;background:rgba(255,77,141,0.15);color:var(--pink);border-color:rgba(255,77,141,0.3);">🚪 Logout Admin</button>
       </div>
     </aside>
 
@@ -149,10 +211,12 @@
       <!-- Top Action Bar -->
       <header class="admin-header">
         <div>
-          <h2 style="font-size:1.25rem;font-weight:700;" id="current-tab-title">📊 Admin Overview</h2>
+          <h2 style="font-size:1.2rem;font-weight:700;margin:0;" id="current-tab-title">📊 Admin Overview</h2>
         </div>
-        <div style="display:flex;gap:1rem;align-items:center;">
-          <button onclick="exportCMSJSON()" class="btn btn-outline btn-sm">💾 Export Database JSON</button>
+        <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
+          <input type="file" id="json-import-input" accept=".json" style="display:none;" onchange="importCMSJSONFile(event)" />
+          <button onclick="document.getElementById('json-import-input').click()" class="btn btn-outline btn-sm">📥 Import JSON</button>
+          <button onclick="exportCMSJSON()" class="btn btn-outline btn-sm">💾 Export JSON</button>
           <button onclick="saveAllAdminChanges()" class="btn btn-primary btn-sm btn-ripple">✨ Save All Changes</button>
         </div>
       </header>
@@ -185,11 +249,12 @@
           </div>
 
           <div class="admin-card">
-            <h3 style="font-family:var(--font-head);margin-bottom:1rem;color:var(--accent);">⚡ Quick Control Panel</h3>
-            <p style="color:var(--text-muted);margin-bottom:1.5rem;line-height:1.6;">Manage site-wide content dynamically. Any edits made here sync in real-time to your live festival website.</p>
+            <h3 style="font-family:var(--font-head);margin-bottom:0.75rem;color:var(--accent);">⚡ Quick Control Panel</h3>
+            <p style="color:var(--text-muted);margin-bottom:1.5rem;line-height:1.6;font-size:0.9rem;">Manage site-wide content dynamically. Edits sync in real-time to your live festival website.</p>
             <div class="flex gap-3 flex-wrap">
-              <button onclick="switchAdminTab('events', document.querySelectorAll('.admin-nav-btn')[2])" class="btn btn-primary btn-sm">+ Add New Event</button>
-              <button onclick="switchAdminTab('settings', document.querySelectorAll('.admin-nav-btn')[1])" class="btn btn-outline btn-sm">Edit Festival Info</button>
+              <button onclick="openModal('modal-event')" class="btn btn-primary btn-sm">+ Add New Event</button>
+              <button onclick="openModal('modal-team')" class="btn btn-outline btn-sm">+ Add Team Member</button>
+              <button onclick="switchAdminTab('settings', document.querySelectorAll('.admin-nav-btn')[1])" class="btn btn-outline btn-sm">Edit Festival Settings</button>
               <button onclick="exportRegistrationsCSV()" class="btn btn-outline btn-sm">Download Registrations CSV</button>
             </div>
           </div>
@@ -243,9 +308,9 @@
 
         <!-- TAB 3: EVENTS MANAGER -->
         <div class="admin-tab" id="tab-events">
-          <div class="admin-card" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
-            <h3>🏆 Manage Official Events</h3>
-            <button onclick="openAddEventModal()" class="btn btn-primary btn-sm">+ Add New Event</button>
+          <div class="admin-card" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+            <h3 style="margin:0;">🏆 Manage Official Events</h3>
+            <button onclick="openModal('modal-event')" class="btn btn-primary btn-sm">+ Add New Event</button>
           </div>
           <div id="admin-events-list" class="grid-2 gap-4">
             <!-- Dynamically Rendered Event Cards -->
@@ -276,9 +341,9 @@
 
         <!-- TAB 5: ORGANISING TEAM -->
         <div class="admin-tab" id="tab-team">
-          <div class="admin-card" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
-            <h3>👥 Organisers &amp; Domain Heads</h3>
-            <button onclick="openAddTeamModal()" class="btn btn-primary btn-sm">+ Add Member</button>
+          <div class="admin-card" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+            <h3 style="margin:0;">👥 Organisers &amp; Domain Heads</h3>
+            <button onclick="openModal('modal-team')" class="btn btn-primary btn-sm">+ Add Member</button>
           </div>
           <div id="admin-team-list" class="grid-3 gap-4">
             <!-- Dynamically Rendered Team Members -->
@@ -288,7 +353,10 @@
         <!-- TAB 6: SPONSORS -->
         <div class="admin-tab" id="tab-sponsors">
           <div class="admin-card">
-            <h3>🤝 Sponsors &amp; Industry Partners</h3>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+              <h3 style="margin:0;">🤝 Sponsors &amp; Partners</h3>
+              <button onclick="openModal('modal-sponsor')" class="btn btn-primary btn-sm">+ Add Sponsor</button>
+            </div>
             <div id="admin-sponsors-list" class="mt-4">
               <!-- Dynamically Rendered Sponsors Table -->
             </div>
@@ -298,33 +366,49 @@
         <!-- TAB 7: REGISTRATIONS -->
         <div class="admin-tab" id="tab-registrations">
           <div class="admin-card">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
-              <h3>📝 Registered Participants</h3>
-              <button onclick="exportRegistrationsCSV()" class="btn btn-outline btn-sm">📥 Export CSV</button>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:1rem;">
+              <h3 style="margin:0;">📝 Participant Registrations</h3>
+              <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                <button onclick="openModal('modal-registration')" class="btn btn-primary btn-sm">+ Add Manual Entry</button>
+                <button onclick="exportRegistrationsCSV()" class="btn btn-outline btn-sm">📥 Export CSV</button>
+                <button onclick="clearAllRegistrations()" class="btn btn-secondary btn-sm" style="background:rgba(255,77,141,0.2);color:var(--pink);border-color:rgba(255,77,141,0.4);">🗑️ Clear All</button>
+              </div>
             </div>
-            <table class="admin-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Event</th>
-                  <th>College</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody id="admin-registrations-tbody">
-                <!-- Dynamically Rendered Registrations -->
-              </tbody>
-            </table>
+            
+            <!-- Registration Search Input -->
+            <div class="form-group" style="margin-bottom:1.25rem;">
+              <input type="text" id="reg-search-input" class="form-control" onkeyup="filterRegistrationsTable()" placeholder="🔍 Search by participant name, email, phone, event, college..." />
+            </div>
+
+            <div class="table-container">
+              <table class="admin-table" id="admin-reg-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Event</th>
+                    <th>College</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-registrations-tbody">
+                  <!-- Dynamically Rendered Registrations -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
         <!-- TAB 8: FAQS -->
         <div class="admin-tab" id="tab-faqs">
           <div class="admin-card">
-            <h3>❓ Manage Frequently Asked Questions</h3>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+              <h3 style="margin:0;">❓ Frequently Asked Questions</h3>
+              <button onclick="openModal('modal-faq')" class="btn btn-primary btn-sm">+ Add FAQ</button>
+            </div>
             <div id="admin-faqs-list" class="mt-4">
               <!-- Dynamically Rendered FAQs -->
             </div>
@@ -333,6 +417,202 @@
 
       </div>
     </main>
+  </div>
+
+  <!-- MODAL: ADD/EDIT EVENT -->
+  <div class="admin-modal-overlay" id="modal-event">
+    <div class="admin-modal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+        <h3 style="margin:0;font-size:1.2rem;" id="modal-event-title">🏆 Add New Event</h3>
+        <button onclick="closeModal('modal-event')" style="background:none;border:none;color:var(--text-muted);font-size:1.25rem;cursor:pointer;">✕</button>
+      </div>
+      <form onsubmit="handleSaveEventForm(event)">
+        <input type="hidden" id="event-form-id" />
+        <div class="form-group">
+          <label class="form-label">Event Title</label>
+          <input type="text" id="event-form-title" class="form-control" placeholder="e.g. AI Prompt Clash" required />
+        </div>
+        <div class="grid-2 gap-3">
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <input type="text" id="event-form-category" class="form-control" placeholder="e.g. Day 1 • Coding" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Prize Pool</label>
+            <input type="text" id="event-form-prize" class="form-control" placeholder="e.g. Rs 25,000" required />
+          </div>
+        </div>
+        <div class="grid-2 gap-3">
+          <div class="form-group">
+            <label class="form-label">Date &amp; Time</label>
+            <input type="text" id="event-form-date" class="form-control" placeholder="Sept 11, 2026" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Venue</label>
+            <input type="text" id="event-form-venue" class="form-control" placeholder="Main Auditorium" required />
+          </div>
+        </div>
+        <div class="grid-2 gap-3">
+          <div class="form-group">
+            <label class="form-label">Team Size</label>
+            <input type="text" id="event-form-teamsize" class="form-control" placeholder="1-4 Members" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Icon Emoji</label>
+            <input type="text" id="event-form-icon" class="form-control" placeholder="⚡" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea id="event-form-desc" class="form-control" rows="3" placeholder="Short summary of the event..." required></textarea>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:0.75rem;margin-top:1.5rem;">
+          <button type="button" onclick="closeModal('modal-event')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Event</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD/EDIT TEAM MEMBER -->
+  <div class="admin-modal-overlay" id="modal-team">
+    <div class="admin-modal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+        <h3 style="margin:0;font-size:1.2rem;">👤 Add / Edit Team Member</h3>
+        <button onclick="closeModal('modal-team')" style="background:none;border:none;color:var(--text-muted);font-size:1.25rem;cursor:pointer;">✕</button>
+      </div>
+      <form onsubmit="handleSaveTeamForm(event)">
+        <input type="hidden" id="team-form-id" />
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" id="team-form-name" class="form-control" placeholder="e.g. Niraj Pattnayak" required />
+        </div>
+        <div class="grid-2 gap-3">
+          <div class="form-group">
+            <label class="form-label">Role / Position</label>
+            <input type="text" id="team-form-role" class="form-control" placeholder="e.g. Organiser / Design Lead" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select id="team-form-category" class="form-control">
+              <option value="Organiser">Organiser</option>
+              <option value="Domain Lead">Domain Lead</option>
+              <option value="Coordinator">Coordinator</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Photo Image Path / URL</label>
+          <input type="text" id="team-form-img" class="form-control" placeholder="assets/team/Niraj Pattnayak_Organiser.png" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">LinkedIn Profile URL</label>
+          <input type="url" id="team-form-linkedin" class="form-control" placeholder="https://www.linkedin.com/in/..." />
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:0.75rem;margin-top:1.5rem;">
+          <button type="button" onclick="closeModal('modal-team')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Member</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD SPONSOR -->
+  <div class="admin-modal-overlay" id="modal-sponsor">
+    <div class="admin-modal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+        <h3 style="margin:0;font-size:1.2rem;">🤝 Add Sponsor</h3>
+        <button onclick="closeModal('modal-sponsor')" style="background:none;border:none;color:var(--text-muted);font-size:1.25rem;cursor:pointer;">✕</button>
+      </div>
+      <form onsubmit="handleSaveSponsorForm(event)">
+        <div class="form-group">
+          <label class="form-label">Sponsor Name</label>
+          <input type="text" id="sponsor-form-name" class="form-control" placeholder="e.g. Google Cloud" required />
+        </div>
+        <div class="grid-2 gap-3">
+          <div class="form-group">
+            <label class="form-label">Tier</label>
+            <input type="text" id="sponsor-form-tier" class="form-control" placeholder="e.g. Title / Gold / Silver" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Icon / Emoji</label>
+            <input type="text" id="sponsor-form-logo" class="form-control" placeholder="☁️" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Website Link</label>
+          <input type="url" id="sponsor-form-link" class="form-control" placeholder="https://..." required />
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:0.75rem;margin-top:1.5rem;">
+          <button type="button" onclick="closeModal('modal-sponsor')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Sponsor</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD FAQ -->
+  <div class="admin-modal-overlay" id="modal-faq">
+    <div class="admin-modal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+        <h3 style="margin:0;font-size:1.2rem;">❓ Add FAQ</h3>
+        <button onclick="closeModal('modal-faq')" style="background:none;border:none;color:var(--text-muted);font-size:1.25rem;cursor:pointer;">✕</button>
+      </div>
+      <form onsubmit="handleSaveFAQForm(event)">
+        <div class="form-group">
+          <label class="form-label">Question</label>
+          <input type="text" id="faq-form-q" class="form-control" placeholder="e.g. What is the team size limit?" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Answer</label>
+          <textarea id="faq-form-a" class="form-control" rows="3" placeholder="Provide clear answer..." required></textarea>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:0.75rem;margin-top:1.5rem;">
+          <button type="button" onclick="closeModal('modal-faq')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save FAQ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: MANUAL REGISTRATION -->
+  <div class="admin-modal-overlay" id="modal-registration">
+    <div class="admin-modal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+        <h3 style="margin:0;font-size:1.2rem;">📝 Add Manual Participant Entry</h3>
+        <button onclick="closeModal('modal-registration')" style="background:none;border:none;color:var(--text-muted);font-size:1.25rem;cursor:pointer;">✕</button>
+      </div>
+      <form onsubmit="handleSaveRegistrationForm(event)">
+        <div class="form-group">
+          <label class="form-label">Participant Name</label>
+          <input type="text" id="reg-form-name" class="form-control" placeholder="e.g. Gunjan Sharma" required />
+        </div>
+        <div class="grid-2 gap-3">
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" id="reg-form-email" class="form-control" placeholder="name@domain.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="text" id="reg-form-phone" class="form-control" placeholder="+91 9876543210" required />
+          </div>
+        </div>
+        <div class="grid-2 gap-3">
+          <div class="form-group">
+            <label class="form-label">Event</label>
+            <input type="text" id="reg-form-event" class="form-control" placeholder="e.g. Hackathon — 24H Build Sprint" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">College / University</label>
+            <input type="text" id="reg-form-college" class="form-control" placeholder="e.g. Ganpat University" required />
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:0.75rem;margin-top:1.5rem;">
+          <button type="button" onclick="closeModal('modal-registration')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Registration</button>
+        </div>
+      </form>
+    </div>
   </div>
 
   <!-- Toast Alert -->
